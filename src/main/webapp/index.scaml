@@ -1,0 +1,18 @@
+- import com.meetup.scala._
+-@ val entries: List[Entry]
+
+%html
+  %body
+    - for (entry <- entries)
+      %h1
+        %p= entry.content
+      %ul
+        - for (comment <- entry.comments)
+          %li #{comment.text} - #{comment.username}
+      %b Comments
+      %p
+        %form{:action=>"/postComment", :method => "POST"}
+          %input{:type => "hidden", :name => "entry_id", :value => {entry.id}}
+          %textarea{:name=> "comment", :value => "Enter comment here"}
+          %br
+          %input{:type=>"submit", :value=>"Post"}
